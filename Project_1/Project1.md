@@ -73,6 +73,32 @@ looks like this:
 
 It works
 
+### STEP 2
+#### Installing MYSQL
+
+- Use ‘apt’ to acquire and install this software
+
+- `sudo apt install mysql-server`
+
+When prompted, confirm installation by typing Y, and then ENTER.
+
+- When the installation is finished, log in to the MySQL console by typing:
+ `sudo mysql`
+ 
+ ![8](https://user-images.githubusercontent.com/123396933/230795249-caba6ba2-1ed8-4563-9cd2-ab9c4b0485de.PNG)
+
+- It is advisable to execute a security script that is pre-installed with MySQL. This script will eliminate insecure default settings and secure access to your database system. Prior to running the script, you will need to set a password for the root user, using 'mysql_native_password' as the default authentication method. The password for this user will be defined as 'PassWord.1'.
+`ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';`
+
+![9](https://user-images.githubusercontent.com/123396933/230795348-ba8809ef-cb90-45eb-a9c9-d074688e48a5.PNG)
+
+- Exit the MySQL shell with:
+
+`mysql> exit`  
+
+
+
+
 
 
 
