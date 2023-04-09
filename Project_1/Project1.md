@@ -7,3 +7,25 @@
 - Ensure that the private key (.PEM file) is saved securely before starting the instance
 
 ![0](https://user-images.githubusercontent.com/123396933/230746708-9004290c-a603-4d95-b70e-7534c0225186.PNG)
+
+- Connecting to EC2 terminal
+  - Using the terminal on MAC/Linux
+  - Using Windows Terminal
+  - We'll be connecting to the EC2 instance using Gitbash terminal installed in my windows system
+
+- We will need the PEM key file that we have saved. Navigate to the download folder in the terminal
+
+![1](https://user-images.githubusercontent.com/123396933/230747272-2918f605-de67-408f-967f-8cbdeaea2ef6.PNG)
+
+- Run this command to ensure your key is not publicly viewable.
+
+`chmod 400 <your-PEM-file-name>.pem`
+
+![2](https://user-images.githubusercontent.com/123396933/230747436-6f268d67-e136-4414-9fd0-9d9c827f3c2f.PNG)
+
+- I'll be utilizing the SSH protocol to establish a connection between my local terminal and the EC2 server
+
+ `ssh -i <private-key-name>. pem ubuntu@<Public-IP-address>`
+
+
+
