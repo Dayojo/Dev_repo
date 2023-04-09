@@ -30,12 +30,50 @@
 ![3](https://user-images.githubusercontent.com/123396933/230747683-a8c1bb1f-b938-47ba-a4aa-91d354f7d253.PNG)
 
  - Type `yes` to connect
- - Now we are connected to our instance well done🎉.
+ - Now we are connected to our instance well done.
  
 ![3 1](https://user-images.githubusercontent.com/123396933/230747623-1a595e80-9dc8-46e5-88d3-661cd6dceef6.PNG)
 
 We have successfully created our first Linux server in the cloud, and our current setup looks like this: (we are the client)
 ![5 1](https://user-images.githubusercontent.com/123396933/230748018-a579a4a1-2b5a-407e-9b21-fcef3595ae1a.PNG)
+
+### STEP 1
+#### Installing Apache and updating the firewall
+
+Update the list of software packages in the package manager:
+
+`sudo apt update`
+
+Run apache2 package installation:
+
+`sudo apt install apache2`
+
+To confirm if apache2 is running as a service in our operating system, execute the following command.:
+
+`sudo systemctl status apache2`
+
+If the status of apache2 is displayed as "green" and it is running, then you have successfully completed all the necessary steps. Congratulations! You have successfully launched your first web server in the cloud!
+
+![4](https://user-images.githubusercontent.com/123396933/230793860-ae4235c8-b3eb-4123-8bdb-1dabf76a7356.PNG)
+
+Now, let's verify if our server is running and accessible both locally and from the internet. To check the local access in Ubuntu shell, you can run the following command:
+
+`curl http://localhost:80`
+
+![5](https://user-images.githubusercontent.com/123396933/230793962-3ca0f69d-d884-42ec-a9ea-03882af1d1bb.PNG)
+
+It's now time to test the responsiveness of our Apache HTTP server to requests from the internet. Please open a web browser of your choice and attempt to access the following URL:
+`http://<Public-IP-Address>:80`
+
+![6](https://user-images.githubusercontent.com/123396933/230794092-00e7daba-16e3-4a08-bd8d-2cd8c4571da2.PNG)
+
+looks like this:
+
+![7](https://user-images.githubusercontent.com/123396933/230794149-5cfd2246-35a5-4ae1-86fa-5a656c5e0846.PNG)
+
+It works
+
+
 
 
 
