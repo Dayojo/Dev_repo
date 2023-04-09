@@ -167,8 +167,6 @@ At this point, our LAMP stack is completely installed and fully operational.
 
 `sudo nano /etc/apache2/sites-available/projectlamp.conf`
 
-![17](https://user-images.githubusercontent.com/123396933/230796484-b539b828-e45b-47d5-b0b6-55626f91a4a7.PNG)
-
  This will create a new blank file. Paste in the following configuration text:
 ```
 <VirtualHost *:80>
@@ -188,7 +186,11 @@ CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```     
 - right click and paste
+
+![17](https://user-images.githubusercontent.com/123396933/230796484-b539b828-e45b-47d5-b0b6-55626f91a4a7.PNG)
+
 - press ctrl + x to exit
+
 - Type Yes and Enter
 ![18](https://user-images.githubusercontent.com/123396933/230796546-156020fb-5b46-4660-a969-4aaa0be9e482.PNG)
 
