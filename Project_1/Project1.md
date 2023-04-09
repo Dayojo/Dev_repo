@@ -17,7 +17,7 @@
 
 ![1](https://user-images.githubusercontent.com/123396933/230747272-2918f605-de67-408f-967f-8cbdeaea2ef6.PNG)
 
-- Run this command to ensure your key is not publicly viewable.
+- We need to run this command to ensure our key is not publicly viewable.
 
 `chmod 400 <your-PEM-file-name>.pem`
 
@@ -62,7 +62,7 @@ Now, let's verify if our server is running and accessible both locally and from 
 
 ![5](https://user-images.githubusercontent.com/123396933/230793962-3ca0f69d-d884-42ec-a9ea-03882af1d1bb.PNG)
 
-It's now time to test the responsiveness of our Apache HTTP server to requests from the internet. Please open a web browser of your choice and attempt to access the following URL:
+It's now time to test the responsiveness of our Apache HTTP server to requests from the internet. We need to open a web browser and attempt to access the following URL:
 `http://<Public-IP-Address>:80`
 
 ![6](https://user-images.githubusercontent.com/123396933/230794092-00e7daba-16e3-4a08-bd8d-2cd8c4571da2.PNG)
