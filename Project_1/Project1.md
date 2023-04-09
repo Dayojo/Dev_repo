@@ -30,13 +30,13 @@
 ![3](https://user-images.githubusercontent.com/123396933/230747683-a8c1bb1f-b938-47ba-a4aa-91d354f7d253.PNG)
 
  - Type `yes` to connect
+ - Now we are connected to our instance well done🎉.
  
 ![3 1](https://user-images.githubusercontent.com/123396933/230747623-1a595e80-9dc8-46e5-88d3-661cd6dceef6.PNG)
 
-- Now we are connected to our instance well done🎉.
 
 
-![4](https://user-images.githubusercontent.com/123396933/230747836-42a0091d-aab8-496f-a6b4-afc308aaf768.PNG)
+
 
 
 
