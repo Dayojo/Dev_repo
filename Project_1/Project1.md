@@ -34,6 +34,9 @@
  
 ![3 1](https://user-images.githubusercontent.com/123396933/230747623-1a595e80-9dc8-46e5-88d3-661cd6dceef6.PNG)
 
+We have created our first Linux Server in the Cloud and our set up looks like this now: (we are the client)
+![5 1](https://user-images.githubusercontent.com/123396933/230748018-a579a4a1-2b5a-407e-9b21-fcef3595ae1a.PNG)
+
 
 
 
