@@ -1,7 +1,7 @@
 # WEB STACK IMPLEMENTATION (LAMP STACK)
 
 ## LAMP (Linux, Apache, MySQL, PHP or Python, or Perl)
-###Setting up our instance
+### Setting up our instance
 - We require an AWS account
 - Initiate the creation of a new EC2 instance from the t2.micro family, running Ubuntu Server 20.04 LTS
 - Ensure that the private key (.PEM file) is saved securely before starting the instance
