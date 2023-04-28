@@ -87,9 +87,70 @@ Exit the MySQL shell with:
 
 mysql> `exit`
 
+Start the interactive script by running:
+
+`sudo mysql_secure_installation`
+
+This will ask if you want to configure the VALIDATE PASSWORD PLUGIN.
+
+Answer `Y` for yes, or anything else to continue without enabling.
+
+![8](https://user-images.githubusercontent.com/123396933/235187868-ffdb7413-1ab2-4a4c-913c-39b1f0fcb7f2.jpg)
+
+Let's test if we are able to log in to the MySQL console by typing: `sudo mysql -p`
+Notice the -p flag in this command, which will prompt you for the password used after changing the root user password.
+
+Exit the MySQL console, type: mysql> `exit` Notice that you need to provide a password to connect as the root user.
+
+## STEP 3 INSTALLING PHP
+
+- To process PHP requests, it's necessary to set up php-fpm, an acronym for "PHP fastCGI process manager", and configure Nginx to route them to this program. Moreover, you'll require php-mysql, a PHP extension that facilitates communication with databases based on MySQL. The fundamental PHP packages will be automatically installed as dependencies.
+
+ - To install these 2 packages at once, run:
+
+`sudo apt install php-fpm php-mysql`
+
+When prompted, type `Y` and press ENTER to confirm installation. You now have your PHP components installed. Next, you will configure Nginx to use them.
+
+## STEP 4 CONFIGURING NGINX TO USE PHP PROCESSOR
+
+- Nginx web server allows us to create server blocks that act like virtual hosts in Apache, enabling us to compartmentalize configuration details and support multiple domains on a single server. To illustrate this concept, we will use the domain name "project LEMP" in this guide.
+
+- Create the root web directory for your domain as follows:
+`sudo mkdir /var/www/projectLEMP`
+
+- Let's assign ownership of the directory with the $USER environment variable, which will reference your current system user:
+`sudo chown -R $USER:$USER /var/www/projectLEMP`
+
+- Then, open a new configuration file in Nginx’s sites-available directory using your preferred command-line editor. Here, we’ll use nano:
+`sudo nano /etc/nginx/sites-available/projectLEMP`
+
+paste this:
 
 
+`#/etc/nginx/sites-available/projectLEMP
 
+server {
+    listen 80;
+    server_name projectLEMP www.projectLEMP;
+    root /var/www/projectLEMP;
+
+    index index.html index.htm index.php;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+}`
 
 
 
