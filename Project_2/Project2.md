@@ -15,4 +15,6 @@
   - Using Windows Terminal
 
   - We'll be connecting to the EC2 instance using Gitbash terminal installed in my windows system
+  
+- We'll be needing our saved PEM key file change directory to download folder 
 
