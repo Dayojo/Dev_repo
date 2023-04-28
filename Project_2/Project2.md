@@ -19,4 +19,6 @@
 - We'll be needing our saved PEM key file change directory to download folder 
 ![0](https://user-images.githubusercontent.com/123396933/235159484-1bd168a5-8bd9-4ea5-a1c6-d3defeb4fac9.PNG)
 
+  -Run this command to ensure your key is not publicly viewable.
+
 
