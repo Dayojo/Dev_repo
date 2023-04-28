@@ -30,3 +30,11 @@
 ![1](https://user-images.githubusercontent.com/123396933/235173887-6f58b62a-fdeb-4316-a126-4e841f2f7936.PNG)
 
 - Type `yes` to connect
+
+- Now we are connected to our instance well done 🎉
+
+# Step 1 Installing the Nginx Web Server
+
+- `sudo apt update` `sudo apt install nginx` When prompted, enter Y to confirm that you want to install Nginx
+
+- To confirm that nginx has been installed correctly and is functioning as a service on Ubuntu. Run `sudo systemctl status nginx`
