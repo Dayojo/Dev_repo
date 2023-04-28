@@ -35,7 +35,7 @@
 
 - Now we are connected to our instance well done 🎉
 
-# Step 1 Installing the Nginx Web Server
+## Step 1 Installing the Nginx Web Server
 
 - `sudo apt update` 
 ![3](https://user-images.githubusercontent.com/123396933/235178553-a166c566-1577-4383-87fd-dc3aee92a725.PNG)
@@ -47,10 +47,34 @@
 ![4](https://user-images.githubusercontent.com/123396933/235178761-02c92412-b825-4458-bbae-9751b9d84d37.jpg)
 
 
-- To confirm that nginx has been installed correctly and is functioning as a service on Ubuntu. Run: `sudo systemctl status nginx`
+- To confirm that nginx has been installed correctly and is functioning as a service on Ubuntu. 
+
+- Run: `sudo systemctl status nginx`
 
 If it is green and running, then you did everything correctly
+
+- As we know, we have TCP port 22 open by default on our EC2 machine to access it via SSH, so we need to add a rule to EC2 configuration to open inbound connection through port 80: Our server is running and we can access it locally and from the Internet (Source 0.0.0.0/0 means ‘from any IP address’). First, let us try to check how we can access it locally in our Ubuntu shell
+
+- Run: `curl http://localhost:80`
+
 ![5](https://user-images.githubusercontent.com/123396933/235179975-ab92a830-22a0-4b97-8cf5-0608f6b532ff.jpg)
+
+- Let's test if our Nginx server can respond to requests from the Internet
+
+Open a web browser of your choice and try to access following url `http://<EcintancePublic-IP-Address>:80`
+
+![6](https://user-images.githubusercontent.com/123396933/235182576-22ca64ed-aaf8-4e80-8227-9c66528ad6bb.PNG)
+
+If you see following page, then your web server is now correctly installed and accessible through your firewall.
+
+
+## STEP 2 INSTALLING MYSQL
+
+
+
+
+
+
 
 
 
