@@ -126,9 +126,9 @@ When prompted, type `Y` and press ENTER to confirm installation. You now have yo
 `sudo nano /etc/nginx/sites-available/projectLEMP`
 
 paste this:
-`
 
-#/etc/nginx/sites-available/projectLEMP
+
+` #/etc/nginx/sites-available/projectLEMP
 
 server {
     listen 80;
@@ -150,7 +150,7 @@ server {
         deny all;
     }
 
-}`
+} `
 
 
 
