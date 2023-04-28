@@ -70,6 +70,24 @@ If you see following page, then your web server is now correctly installed and a
 
 ## STEP 2 INSTALLING MYSQL
 
+- To acquire and install this software:
+
+`sudo apt install mysql-server` 
+when promted type `yes`
+
+- When the installation is finished, log in to the MySQL console by typing:
+
+`sudo mysql`
+
+![7](https://user-images.githubusercontent.com/123396933/235184723-9157a0aa-1906-4d87-b4b1-0c7e872d3168.jpg)
+
+- Before running the script, you will set a password for the root user, using mysql_native_password as default authentication method. We’re defining this user’s password as PassWord.1 `ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';`
+
+Exit the MySQL shell with:
+
+mysql> `exit`
+
+
 
 
 
