@@ -134,7 +134,7 @@ server {
     server_name projectLEMP www.projectLEMP;
     root /var/www/projectLEMP;
 
-   `index index.html index.htm index.php;
+    index index.html index.htm index.php;
 
     location / {
         try_files $uri $uri/ =404;
@@ -147,11 +147,25 @@ server {
 
     location ~ /\.ht {
         deny all;
-    }`
+    }
 
 }
 
 ```
+
+When you’re done editing, save and close the file. If you’re using nano, you can do so by typing: CTRL+X and then y and ENTER to confirm.
+
+- Activate your configuration by linking to the config file from Nginx’s sites-enabled directory:
+
+`sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/`
+
+This will tell Nginx to use the configuration next time it is reloaded. You can test your configuration for syntax errors by typing:
+
+`sudo nginx -t`
+
+You shall see following message:
+
+![9](https://user-images.githubusercontent.com/123396933/235194647-e79f0522-647c-4545-8e5b-53c6e765f38a.jpg)
 
 
 
