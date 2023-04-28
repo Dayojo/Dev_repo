@@ -37,15 +37,22 @@
 
 # Step 1 Installing the Nginx Web Server
 
-- `sudo apt update` `sudo apt install nginx` When prompted, enter `Y` to confirm that you want to install Nginx
-
+- `sudo apt update` 
 ![3](https://user-images.githubusercontent.com/123396933/235178553-a166c566-1577-4383-87fd-dc3aee92a725.PNG)
+
+- `sudo apt install nginx` 
+- When prompted, enter `Y` to confirm that you want to install Nginx
+
+
+![4](https://user-images.githubusercontent.com/123396933/235178761-02c92412-b825-4458-bbae-9751b9d84d37.jpg)
+
 
 - To confirm that nginx has been installed correctly and is functioning as a service on Ubuntu. Run: `sudo systemctl status nginx`
 
 If it is green and running, then you did everything correctly
+![5](https://user-images.githubusercontent.com/123396933/235179975-ab92a830-22a0-4b97-8cf5-0608f6b532ff.jpg)
 
-![4](https://user-images.githubusercontent.com/123396933/235178761-02c92412-b825-4458-bbae-9751b9d84d37.jpg)
+
 
 
 
