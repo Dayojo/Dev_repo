@@ -10,3 +10,9 @@
 
 - Connecting to EC2 terminal
 
+ - Using the terminal on MAC/Linux
+
+ - Using Windows Terminal
+
+ - We'll be connecting to the EC2 instance using Gitbash terminal installed in my windows system
+
