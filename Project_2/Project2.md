@@ -23,7 +23,8 @@
 
   `chmod 400 <your-PEM-file-name>.pem`
 
-- I will utilize the ssh protocol to establish a connection between my local terminal and my EC2 server.
+- I will utilize the ssh protocol to establish a connection between my local terminal and my EC2 server
+
   `ssh -i <private-key-name>. pem ubuntu@<Public-IP-address>`
 
 ![1](https://user-images.githubusercontent.com/123396933/235173887-6f58b62a-fdeb-4316-a126-4e841f2f7936.PNG)
