@@ -181,6 +181,36 @@ You shall see following message:
 
 Now go to your browser and try to open your website URL using IP address: `http://<EcintancePublic-IP-Address>:80`
 
+![10](https://user-images.githubusercontent.com/123396933/235366448-679f2aab-289d-41f6-8af5-95b083da3824.PNG)
+
+The "echo" command we used to write to the index.html file was successful, indicating that our Nginx site is working correctly.
+
+Next, let's attempt to access the website using the DNS name by navigating to the following URL in a web browser:
+
+`http://<InstancePublicPublic-DNS-Name>:80`
+
+![11](https://user-images.githubusercontent.com/123396933/235366570-935c81d7-6ef9-41b2-9bd1-1c93dfd0ad16.PNG)
+
+- Your LEMP stack is now fully configured. In the next step, we’ll create a PHP script to test that Nginx is in fact able to handle .php files within your newly configured website.
+
+## STEP 5 TESTING PHP WITH NGINX
+
+Open a new file called info.php within your document root in your text editor:
+`sudo nano /var/www/projectLEMP/info.php`
+
+Type or paste the following lines into the new file. This is valid PHP code that will return information about your server:
+
+```
+<?php
+phpinfo();
+```
+
+![12](https://user-images.githubusercontent.com/123396933/235366894-b7b3269a-0973-49db-b01d-cc5a7504e791.PNG)
+
+
+
+
+
 
 
 
