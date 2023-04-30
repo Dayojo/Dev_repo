@@ -211,10 +211,126 @@ You can now access this page in your web browser by visiting the domain name or 
 
 `http://server_domain_or_IP/info.php`
 
+![13](https://user-images.githubusercontent.com/123396933/235366987-a319a32d-c4c9-45d1-b0e1-ff2aebe6af21.PNG)
+
+## 0R
+
+![14](https://user-images.githubusercontent.com/123396933/235367336-2944938f-853a-497b-8427-a4de3cebd5f2.PNG)
 
 
+## STEP 6 Retrieving data from MySQL database with PHP
+
+In this step we will create a test database (DB) with simple "To do list" and configure access to it, so the Nginx website would be able to query data from the DB and display it.
+
+We will create a database named example_database and a user named example_user, but you can replace these names with different values.
+
+First, connect to the MySQL console using the root account:
+`sudo mysql`
+
+![15](https://user-images.githubusercontent.com/123396933/235367553-c02ffbc0-8788-41d2-8a8f-a5333dc19dec.jpg)
+
+- Lets create a new database, run the following command from your MySQL console:
+
+`CREATE DATABASE example_database;`
+
+- Now we can create a new user and grant him full privileges on the database we have just created.
+
+`CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';`
+
+![16](https://user-images.githubusercontent.com/123396933/235367799-eaaa06f2-d062-4f9c-aee9-3425be5f2ea7.PNG)
+
+The following command above creates a new user named example_user, using mysql_native_password as default authentication method. We’re defining this user’s password as password, but you should replace this value with a secure password of your own choosing.
+
+- Now we need to give this user permission over the example_database database:
+
+`GRANT ALL ON example_database.* TO 'example_user'@'%';`
+
+![17](https://user-images.githubusercontent.com/123396933/235367992-81700301-7a54-416e-92c7-09475154bf57.PNG)
+
+This will give the example_user user full privileges over the example_database database, while preventing this user from creating or modifying other databases on your server.
+
+Now exit the MySQL shell with: `exit`
+
+- Lets test if the new user has the proper permissions by logging in to the MySQL console again, this time using the custom user credentials:
+`mysql -u example_user -p`
+
+![18](https://user-images.githubusercontent.com/123396933/235368097-14d01543-31a9-4c07-81cc-a5c9d7893d8c.PNG)
+
+- Notice the -p flag in this command, which will prompt us for the password used when creating the example_user user. After logging in to the MySQL console, confirm that you have access to the example_database database: mysql> `SHOW DATABASES;`
+
+This will give you the following output:
+
+![19](https://user-images.githubusercontent.com/123396933/235368386-b89afe82-4247-454a-8d69-bff0f29d85c9.PNG)
+
+- Now lets create a test table named todo_list. From the MySQL console, run the following statement:
+
+```
+CREATE TABLE example_database.todo_list (
+mysql> 	item_id INT AUTO_INCREMENT,
+mysql> 	content VARCHAR(255),
+mysql> 	PRIMARY KEY(item_id)
+mysql> );
+```
+
+![20](https://user-images.githubusercontent.com/123396933/235368577-22acc3bc-b2a0-4b50-b4f9-a21e254b1e66.PNG)
+
+You might want to repeat the next command a few times, using different VALUES:
+
+`INSERT INTO example_database.todo_list (content) VALUES ("My first important item");`
+
+![21](https://user-images.githubusercontent.com/123396933/235368733-69c17daf-e385-4b43-9560-6539f8cc8017.PNG)
+
+- To confirm that the data was successfully saved to your table, run: `SELECT * FROM` `example_database.todo_list;`
+
+We should see the following output:
+
+![22](https://user-images.githubusercontent.com/123396933/235368844-919b0bd6-9623-4831-9c30-8940bec4d40d.PNG)
+
+- After confirming that you have valid data in your test table, you can exit the MySQL console: mysql> `exit`
+
+Now you can create a PHP script that will connect to MySQL and query for your content. Create a new PHP file in your custom web root directory using your preferred editor. We’ll use nano editor for that: 
+`nano /var/www/projectLEMP/todo_list.php`
+
+The following PHP script connects to the MySQL database and queries for the content of the todo_list table, displays the results in a list. If there is a problem with the database connection, it will throw an exception. Copy this content into your todo_list.php script:
+
+```
+<?php
+$user = "example_user";
+$password = "PassWord.1";
+$database = "example_database";
+$table = "todo_list";
+
+try {
+$db = new PDO("mysql:host=localhost;dbname=$database", $user, $password);
+echo "<h2>TODO</h2><ol>";
+foreach($db->query("SELECT content FROM $table") as $row) {
+    echo "<li>" . $row['content'] . "</li>";
+}
+echo "</ol>";
+} catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
+
+```
+
+![23](https://user-images.githubusercontent.com/123396933/235369002-155a6d13-4ef7-4c6f-adee-f86fd309c04d.PNG)
+
+Save and close the file when you are done editing.
+
+You can now access this page in your web browser by visiting the domain name or public IP address configured for your website, followed by /todo_list.php:
+
+`http://<Public_domain_or_IP>/todo_list.php`
+
+You should see a page like this, showing the content you’ve inserted in your test table:
+
+![24](https://user-images.githubusercontent.com/123396933/235369067-62f39f83-48a2-48e2-80e8-b19efc1d6023.PNG)
+
+## OR
+
+![25](https://user-images.githubusercontent.com/123396933/235369122-ba168e4f-7e48-4cd4-bf0b-daf46279b417.PNG)
 
 
-
+## Now terminate your instance and any other resources to avoid additional charges
 
 
