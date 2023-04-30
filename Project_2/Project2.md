@@ -167,6 +167,20 @@ You shall see following message:
 
 ![9](https://user-images.githubusercontent.com/123396933/235194647-e79f0522-647c-4545-8e5b-53c6e765f38a.jpg)
 
+- If you receive any error messages, you should revisit your configuration file and check its contents before proceeding further. In addition, you must deactivate the default Nginx host that is presently set to use port 80. To accomplish this, execute the following command:
+
+`sudo unlink /etc/nginx/sites-enabled/default`
+
+- Let's reload Nginx to apply the changes:
+
+`sudo systemctl reload nginx`
+
+- The website is up and running now, but the web root directory located at /var/www/projectLEMP is still empty. To ensure that your new server block is functioning correctly, We will create an index.html file in that directory using the following command:
+
+`sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html`
+
+Now go to your browser and try to open your website URL using IP address: `http://<EcintancePublic-IP-Address>:80`
+
 
 
 
