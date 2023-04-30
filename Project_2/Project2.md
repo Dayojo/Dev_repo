@@ -207,6 +207,10 @@ phpinfo();
 
 ![12](https://user-images.githubusercontent.com/123396933/235366894-b7b3269a-0973-49db-b01d-cc5a7504e791.PNG)
 
+You can now access this page in your web browser by visiting the domain name or public IP address you’ve set up in your Nginx configuration file, followed by /info.php:
+
+`http://server_domain_or_IP/info.php`
+
 
 
 
