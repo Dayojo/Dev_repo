@@ -183,3 +183,83 @@ router.delete('/todos/:id', (req, res, next) => {
 
 module.exports = router;
 ```
+
+
+## STEP 4
+
+- since the app is going to make use of Mongodb which is a NoSQL database, we need to create a model.A schema is a blueprint of how the database will be constructed, including other data fields that may not be required to be stored in the database. These are known as virtual properties.
+
+- To create a Schema and a model, install mongoose which is a Node.js package that makes working with mongodb easier.
+
+    - Change directory back Todo folder with cd .. and install Mongoose `npm install mongoose`
+    - Create a new folder models : `mkdir models`
+    - Change the directory into the newly created ‘models’ folder with `cd models`
+ - All three commands above can be defined in one line to be executed consequently with help of && operator, like this: `mkdir models && cd models && touch todo.js`
+
+paste this in the nano editor todo.js file:
+
+```
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+//create schema for todo
+const TodoSchema = new Schema({
+action: {
+type: String,
+required: [true, 'The todo text field is required']
+}
+})
+
+//create model for todo
+const Todo = mongoose.model('todo', TodoSchema);
+
+module.exports = Todo;
+
+```
+
+- Now we need to update our routes from the file api.js in ‘routes’ directory to make use of the new model. cd ~
+cd to Routes directory, open api.js with: 
+`nano api.js`
+delete the code inside and paste these code below into it then save and exit:
+
+```
+
+const express = require ('express');
+const router = express.Router();
+const Todo = require('../models/todo');
+ 
+router.get('/todos', (req, res, next) => {
+ 
+//this will return all the data, exposing only the id and action field to the client
+Todo.find({}, 'action')
+.then(data => res.json(data))
+.catch(next)
+});
+ 
+router.post('/todos', (req, res, next) => {
+if(req.body.action){
+Todo.create(req.body)
+.then(data => res.json(data))
+.catch(next)
+}else {
+res.json({
+error: "The input field is empty"
+})
+}
+});
+ 
+router.delete('/todos/:id', (req, res, next) => {
+Todo.findOneAndDelete({"_id": req.params.id})
+.then(data => res.json(data))
+.catch(next)
+})
+
+```
+
+## STEP 5 MongoDB Database
+
+- To store our data, we require a database. In this case, we will utilize mLab, which offers MongoDB database as a service (DBaaS). To simplify the process, it is recommended to sign up for a free account with shared clusters, which suits our use case perfectly. You can sign up by visiting the provided link. Follow the signup process, and during the procedure, select AWS as the cloud provider and choose a region that is geographically close to your location.
+
+- After signing up, go through the quick guide for getting started. Additionally, we will allow access to the MongoDB database from any location, although it's important to note that this approach is not secure. However, for testing purposes, it serves as an ideal solution.
+ 
+module.exports = router;
