@@ -254,6 +254,8 @@ Todo.findOneAndDelete({"_id": req.params.id})
 .catch(next)
 })
 
+module.exports = router;
+
 ```
 
 ## STEP 5 MongoDB Database
@@ -262,4 +264,261 @@ Todo.findOneAndDelete({"_id": req.params.id})
 
 - After signing up, go through the quick guide for getting started. Additionally, we will allow access to the MongoDB database from any location, although it's important to note that this approach is not secure. However, for testing purposes, it serves as an ideal solution.
  
-module.exports = router;
+![13](https://github.com/Dayojo/Dev_repo/assets/123396933/f734539b-196b-45bf-b12b-2e75c7496c93)
+
+![14](https://github.com/Dayojo/Dev_repo/assets/123396933/14c85b00-7aae-467d-a667-a6885445b1c4)
+
+
+![15](https://github.com/Dayojo/Dev_repo/assets/123396933/ad3db152-d261-468a-9307-c5c6a2fcbbf7)
+
+
+![16](https://github.com/Dayojo/Dev_repo/assets/123396933/ca85cc1d-0c14-4d3a-b10a-3cb9ef785a2b)
+
+
+In the index.js file, we specified process.env to access environment variables, but we have not yet created this file. So we need to do that now.
+
+Create a file in your Todo directory and name it .env. 
+
+`cd Todo`
+
+`touch .env`
+
+`nano  .env`
+
+Add the connection string to access the database in it, just as below:
+
+`DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites=true&w=majority'`
+
+Ensure to update `<username>, <password>, <network-address> and <database>` according to your setup
+
+Here is how to get your connection string
+
+
+![17](https://github.com/Dayojo/Dev_repo/assets/123396933/9e16861e-51d9-45bc-9c76-992fd80f27ea)
+
+
+![18](https://github.com/Dayojo/Dev_repo/assets/123396933/b01f6bbc-e915-4d46-951f-3825213c8a3a)
+
+
+![19](https://github.com/Dayojo/Dev_repo/assets/123396933/5eee455b-3d4e-45fe-ae9f-9e9033e8e68d)
+
+
+Now we need to update the index.js to reflect the use of .env so that Node.js can connect to the database.
+
+`nano index.js`
+
+delete existing content in the file, and update it with the entire code below:
+
+```
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const routes = require('./routes/api');
+const path = require('path');
+require('dotenv').config();
+
+const app = express();
+
+const port = process.env.PORT || 5000;
+
+//connect to the database
+mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => console.log(`Database connected successfully`))
+.catch(err => console.log(err));
+
+//since mongoose promise is depreciated, we overide it with node's promise
+mongoose.Promise = global.Promise;
+
+app.use((req, res, next) => {
+res.header("Access-Control-Allow-Origin", "\*");
+res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+next();
+});
+
+app.use(bodyParser.json());
+
+app.use('/api', routes);
+
+app.use((err, req, res, next) => {
+console.log(err);
+next();
+});
+
+app.listen(port, () => {
+console.log(`Server running on port ${port}`)
+});
+
+```
+
+- paraphrase this please "Using environment variables to store information is considered more secure and best practice to separate configuration and secret data from the application, instead of writing connection strings directly inside the index.js application file.
+
+- Start your server using the command:
+
+`node index.js`
+
+- We will see a message ‘Database connected successfully
+
+![20](https://github.com/Dayojo/Dev_repo/assets/123396933/b1887edc-cbd1-4233-b912-8fdd036e68f0)
+
+This means we have our backend configured. Now we are going to test it.
+
+- So far we have written the backend part of our To-Do application, and configured a database, but we do not have a frontend UI yet. We need ReactJS code to achieve that. But during development, we will need a way to test our code using RESTful API. Therefore, we will need to make use of some API development client to test our code.
+
+- In this project, we will use Postman to test our API. Click Install Postman to download and install postman on your machine. Click HERE to learn how perform CRUD operations on Postman
+
+
+make sure your set header key
+
+`Content-Type as application/json`
+
+![21](https://github.com/Dayojo/Dev_repo/assets/123396933/43ddc96f-cc14-47a1-8811-8d101811b30b)
+
+- Create a GET request to your API on `http://<PublicIP-or-PublicDNS>:5000/api/todos`. This request retrieves all existing records from out To-do application (backend requests these records from the database and sends it us back as a response to GET request).
+
+![22](https://github.com/Dayojo/Dev_repo/assets/123396933/de3f29e1-b444-477d-8551-a9eb93cc5a92)
+
+
+- DELETE request to delete a task from out To-Do list.
+
+![23](https://github.com/Dayojo/Dev_repo/assets/123396933/680f7995-447d-4dba-9577-081ed53fb590)
+
+
+![24](https://github.com/Dayojo/Dev_repo/assets/123396933/0276283e-73c0-40e6-b119-423ca4310eda)
+
+
+- By now you have tested backend part of our To-Do application and have made sure that it supports all three operations we wanted: Display a list of tasks – HTTP GET request Add a new task to the list – HTTP POST request Delete an existing task from the list – HTTP DELETE request We have successfully created our Backend, now let go create the Frontend.
+
+## Step 6 – Frontend creation
+
+- we will use the create-react-app command to scaffold our app.
+
+- In the same root directory as your backend code, which is the Todo directory, run: npx create-react-app client This will create a new folder in your Todo directory called client, where you will add all the react code.
+Running a React App
+
+- Before testing the react app, there are some dependencies that need to be installed.
+  - Install concurrently. It is used to run more than one command simultaneously from the same terminal window. `npm install concurrently --save-dev`
+  - Install nodemon. It is used to run and monitor the server. If there is any change in the server code, nodemon will restart it automatically and load the new changes. `npm install nodemon --save-dev` In Todo folder open the package.json file. `cd Todo nano package.json`
+Change the highlighted part of the below screenshot and replace with the code below.
+
+![25](https://github.com/Dayojo/Dev_repo/assets/123396933/7b7612c0-064f-4946-8037-fe3293aebf32)
+
+
+replace with:
+
+```
+"scripts": { "start": "node index.js",
+
+"start-watch": "nodemon index.js",
+"dev": "concurrently "npm run start-watch" "cd client && npm start"" },
+
+```
+
+
+![26](https://github.com/Dayojo/Dev_repo/assets/123396933/4eb4d41c-2e8f-466c-b33e-b93c14c93a69)
+
+- Configure Proxy in package.json
+
+  - Change directory to ‘client’ `cd client`
+  - Open the package.json file `nano package.json`
+- Add the key value pair in the package.json file
+
+`"proxy": "http://localhost:5000",`
+
+
+![27](https://github.com/Dayojo/Dev_repo/assets/123396933/6b87e651-570e-4e55-a29f-65098f681f42)
+
+
+- The whole purpose of adding the proxy configuration in number 3 above is to make it possible to access the application directly from the browser by simply calling the server url like `http://localhost:5000` rather than always including the entire path like `http://localhost:5000/api/todos`
+
+- In order to be able to access the application from the Internet you have to open TCP port 3000 on EC2 by adding a new Security Group rule. You already know how to do it.
+
+![28](https://github.com/Dayojo/Dev_repo/assets/123396933/c5aa4fd8-5d7a-45d0-b20e-e219ebc70425)
+
+Now, ensure you are inside the Todo directory, and simply do
+
+`npm run dev`
+
+![29](https://github.com/Dayojo/Dev_repo/assets/123396933/79f82dab-e30d-434d-a93c-a37cac34c61a)
+
+- Your app should open and start running on `ec2 ip address:3000`
+
+
+![30](https://github.com/Dayojo/Dev_repo/assets/123396933/0dbe4db9-2b95-463d-8aa7-002797b4b2e9)
+
+
+- Creating your React Components One of the advantages of react is that it makes use of components, which are reusable and also make code modular. For our Todo app, there will be two stateful components and one stateless component.
+
+- From your Todo directory run
+
+`cd client`
+
+- move to the src directory
+
+`cd src`
+
+- Inside your src folder create another folder called components
+
+`mkdir components`
+
+- Move into the components directory with
+
+`cd components`
+
+- Inside ‘components’ directory create three files Input.js, ListTodo.js and Todo.js.
+
+`touch Input.js ListTodo.js Todo.js`
+
+- Open Input.js file
+
+`nano Input.js`
+
+- Copy and paste the following:
+
+```
+import React, { Component } from 'react';
+import axios from 'axios';
+
+class Input extends Component {
+
+state = {
+action: ""
+}
+
+addTodo = () => {
+const task = {action: this.state.action}
+
+    if(task.action && task.action.length > 0){
+      axios.post('/api/todos', task)
+        .then(res => {
+          if(res.data){
+            this.props.getTodos();
+            this.setState({action: ""})
+          }
+        })
+        .catch(err => console.log(err))
+    }else {
+      console.log('input field required')
+    }
+
+}
+
+handleChange = (e) => {
+this.setState({
+action: e.target.value
+})
+}
+
+render() {
+let { action } = this.state;
+return (
+<div>
+<input type="text" onChange={this.handleChange} value={action} />
+<button onClick={this.addTodo}>add todo</button>
+</div>
+)
+}
+}
+export default Input
+
+```
