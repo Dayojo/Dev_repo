@@ -522,3 +522,300 @@ return (
 export default Input
 
 ```
+
+![31](https://github.com/Dayojo/Dev_repo/assets/123396933/b9581e0b-5761-4a1d-96aa-07014e0fcb1d)
+
+- Move to the src folder
+`cd ..`
+
+- Move to clients folder
+`cd ..`
+
+- Install Axios
+
+`npm install axios`
+
+- Go to the ‘components’ directory
+
+`cd src/components`
+
+- After that open your ListTodo.js
+
+`nano ListTodo.js`
+
+Delete anything in the ListTodo.js then copy and paste the following code:
+
+```
+import React from 'react';
+
+const ListTodo = ({ todos, deleteTodo }) => {
+
+return (
+<ul>
+{
+todos &&
+todos.length > 0 ?
+(
+todos.map(todo => {
+return (
+<li key={todo._id} onClick={() => deleteTodo(todo._id)}>{todo.action}</li>
+)
+})
+)
+:
+(
+<li>No todo(s) left</li>
+)
+}
+</ul>
+)
+}
+
+export default ListTodo
+```
+
+![32](https://github.com/Dayojo/Dev_repo/assets/123396933/53f8ab2e-f84e-4f66-b712-6c3ecfe6f6c4)
+
+- Then delete everything in nano Todo.js file paste the following code:
+
+```
+
+import React, {Component} from 'react';
+import axios from 'axios';
+
+import Input from './Input';
+import ListTodo from './ListTodo';
+
+class Todo extends Component {
+
+state = {
+todos: []
+}
+
+componentDidMount(){
+this.getTodos();
+}
+
+getTodos = () => {
+axios.get('/api/todos')
+.then(res => {
+if(res.data){
+this.setState({
+todos: res.data
+})
+}
+})
+.catch(err => console.log(err))
+}
+
+deleteTodo = (id) => {
+
+    axios.delete(`/api/todos/${id}`)
+      .then(res => {
+        if(res.data){
+          this.getTodos()
+        }
+      })
+      .catch(err => console.log(err))
+
+}
+
+render() {
+let { todos } = this.state;
+
+    return(
+      <div>
+        <h1>My Todo(s)</h1>
+        <Input getTodos={this.getTodos}/>
+        <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
+      </div>
+    )
+
+}
+}
+
+export default Todo;
+
+```
+
+![33](https://github.com/Dayojo/Dev_repo/assets/123396933/580a97c5-ac69-4522-86b3-66e4d7096213)
+
+
+- We need to make little adjustment to our react code. Delete the logo and adjust our App.js to look like this.
+
+- Move to the src folder
+`cd ..`
+
+- Make sure that you are in the src folder and run
+
+`nano App.js`
+
+- Delete what is there then copy and paste the code below into it:
+
+```
+
+import Todo from './components/Todo';
+import './App.css';
+ 
+const App = () => {
+return (
+<div className="App">
+<Todo />
+</div>
+);
+}
+
+export default App;
+
+```
+
+![33b](https://github.com/Dayojo/Dev_repo/assets/123396933/9d65f132-8a9e-4943-aed9-cc3111712ba8)
+
+- After pasting, exit the editor.
+
+- In the src directory open the App.css
+
+`nano App.css`
+
+- Then paste the following code into App.css:
+
+```
+.App {
+text-align: center;
+font-size: calc(10px + 2vmin);
+width: 60%;
+margin-left: auto;
+margin-right: auto;
+}
+ 
+input {
+height: 40px;
+width: 50%;
+border: none;
+border-bottom: 2px #101113 solid;
+background: none;
+font-size: 1.5rem;
+color: #787a80;
+}
+ 
+input:focus {
+outline: none;
+}
+ 
+button {
+width: 25%;
+height: 45px;
+border: none;
+margin-left: 10px;
+font-size: 25px;
+background: #101113;
+border-radius: 5px;
+color: #787a80;
+cursor: pointer;
+}
+ 
+button:focus {
+outline: none;
+}
+ 
+ul {
+list-style: none;
+text-align: left;
+padding: 15px;
+background: #171a1f;
+border-radius: 5px;
+}
+ 
+li {
+padding: 15px;
+font-size: 1.5rem;
+margin-bottom: 15px;
+background: #282c34;
+border-radius: 5px;
+overflow-wrap: break-word;
+cursor: pointer;
+}
+ 
+@media only screen and (min-width: 300px) {
+.App {
+width: 80%;
+}
+ 
+input {
+width: 100%
+}
+ 
+button {
+width: 100%;
+margin-top: 15px;
+margin-left: 0;
+}
+}
+ 
+@media only screen and (min-width: 640px) {
+.App {
+width: 60%;
+}
+ 
+input {
+width: 50%;
+}
+ 
+button {
+width: 30%;
+margin-left: 10px;
+margin-top: 0;
+}
+}
+
+```
+
+![34](https://github.com/Dayojo/Dev_repo/assets/123396933/8fb414c3-9a73-4e85-a52a-df36106a9d8e)
+
+- In the src directory open the index.css
+
+`nano index.css`
+
+- Delete was there then copy and paste the code below
+
+```
+body {
+margin: 0;
+padding: 0;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+box-sizing: border-box;
+background-color: #282c34;
+color: #787a80;
+}
+
+code {
+font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+monospace;
+}
+
+```
+
+
+![35](https://github.com/Dayojo/Dev_repo/assets/123396933/7cb07de7-4d94-4d1d-8991-eef0bd8a05bd)
+
+- Go to the Todo directory
+
+`cd ../..`
+
+- When you are in the Todo directory run:
+
+`npm run dev`
+
+![36](https://github.com/Dayojo/Dev_repo/assets/123396933/e5cd2c3a-5694-46b8-8959-b671b35d423e)
+
+
+- Assuming no errors when saving all these files, our To-Do app should be ready and fully functional with the functionality discussed earlier: creating a task, deleting a task and viewing all your tasks.
+
+![37](https://github.com/Dayojo/Dev_repo/assets/123396933/ff9951bb-dd8d-4dab-9fb2-7fc26c51594e)
+
+
+### Now terminate your instance and any other resources to avoid additional charges
